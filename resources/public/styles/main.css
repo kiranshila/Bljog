@@ -1,0 +1,43 @@
+code[class*="language-"],
+pre[class*="language-"] {
+  word-wrap: normal;
+  background: none;
+  color: #f8f8f2;
+  font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  line-height: 1.5;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  text-align: left;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+  white-space: pre;
+  word-break: normal;
+  word-spacing: normal;
+}
+
+code[class*="language-"] {
+  padding: 0;
+}
+
+pre[class*="language-"] {
+  padding: 1rem;
+  border-radius: 0.3em;
+  overflow: auto;
+  border-style: solid !important;
+  border-width: 1px !important;
+  border: #44475a;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background: #282a36;
+}
+
+:not(pre) > code[class*="language-"] {
+  border-radius: 0.3em;
+  padding: 0;
+  white-space: normal;
+}
