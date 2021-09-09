@@ -3,9 +3,10 @@ title: Building an F5 Mandolin – Part 1
 author: kiran
 date: 2019-01-02T04:36:05+00:00
 featured_image: /wp-content/uploads/2019/01/IMG_2547-1-1360x765.jpg
-music:
+tags:
   - music
 ---
+
 So I have wanted to build a mandolin for a while now. I have a cheap Ibanez that I got from Guitar Center, but the action is weird, the truss rod is wonky, and the sound is pretty dead. I love building things, so I thought I could give luthiery a try.
 
 I bought [The Ultimate Bluegrass Mandolin Construction Manual][1] by Roger Siminoff to follow along and to have actual plans. I have tried to design and build some instruments in the past, but they all were kind of a train wreck.
@@ -14,7 +15,7 @@ This mandolin is based on the design of the famous Lloyd Loar F5 Mandolin made b
 
 <!--more-->
 
-# Part 1a  The Neck
+# Part 1a The Neck
 
 So the first thing the manual has you do is to build the neck for the instrument. I bought some 2' hard sugar maple from my local specialty wood store and got to work. I intend to use these plans again, so I really should make solid plastic or aluminum templates from the full size plans, but for this I just used a piece of paper.
 
@@ -70,4 +71,4 @@ I glued the joints and clamped everything square and true where it will sit over
 
 To finish the neck, I need to finish the peghead side, then install the truss rod and form the dovetail.
 
- [1]: https://www.amazon.com/Ultimate-Bluegrass-Mandolin-Construction-Manual/dp/0634062859
+[1]: https://www.amazon.com/Ultimate-Bluegrass-Mandolin-Construction-Manual/dp/0634062859
