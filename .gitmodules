@@ -1,0 +1,3 @@
+[submodule "resources/public/posts"]
+	path = resources/public/posts
+	url = git@github.com:kiranshila/blog_posts.git
