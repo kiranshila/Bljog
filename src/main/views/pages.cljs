@@ -9,12 +9,15 @@
 (defn blog-list [num]
   (let [post-order @(rf/subscribe [::subs/post-order])
         posts @(rf/subscribe [::subs/posts])]
-    [:div
-     [:> drac/Box {:width "4xl" :style {:margin "auto"}}
-      (take num (for [post post-order
-                      :when (not (:draft (posts post)))]
-                  ^{:key post}
-                  [views/post-card (posts post)]))]]))
+
+    (try
+      [:div
+       [:> drac/Box {:width "4xl" :style {:margin "auto"}}
+        (take num (for [post post-order
+                        :when (not (:draft (posts post)))]
+                    ^{:key post}
+                    [views/post-card (posts post)]))]]
+      (catch js/Exception e (println e)))))
 
 (defn home []
   [:div
