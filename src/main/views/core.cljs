@@ -61,9 +61,8 @@
   [:div {:style {:display "flex" :align-items "center"}}
    [:> drac/Box {:style {:margin-right "1rem"}}
     [:> drac/Text {:color "blackSecondary"}
-     (try
-       (t/format (t/formatter "MMM dd, yy") (t/date (:date frontmatter)))
-       (catch js/Exception e (println "Error in " (:filename frontmatter))))]]
+     (:date frontmatter)
+     #_(t/format (t/formatter "MMM dd, yy") (t/date (:date frontmatter)))]]
    [:> drac/Box {:m "md"}
     [:> drac/Anchor {:size "lg"
                      :href (str "/blog/" (:filename frontmatter))
