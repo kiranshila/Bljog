@@ -6,25 +6,25 @@
    [main.subs :as subs]
    [main.views.core :as views]))
 
-(defn home []
-  (let [top-posts (take 5 @(rf/subscribe [::subs/post-order]))
-        posts @(rf/subscribe [::subs/posts])]
-    [:div
-     [:> drac/Heading {:size "xl" :align "center"} "Recent Posts"]
-     [:> drac/Box {:width "4xl" :style {:margin "auto"}}
-      (for [post top-posts]
-        ^{:key post}
-        [views/post-card (posts post)])]]))
-
-(defn blog []
+(defn blog-list [num]
   (let [post-order @(rf/subscribe [::subs/post-order])
         posts @(rf/subscribe [::subs/posts])]
     [:div
-     [:> drac/Heading {:size "xl" :align "center"} "All Posts"]
      [:> drac/Box {:width "4xl" :style {:margin "auto"}}
-      (for [post post-order]
-        ^{:key post}
-        [views/post-card (posts post)])]]))
+      (take num (for [post post-order
+                      :when (not (:draft (posts post)))]
+                  ^{:key post}
+                  [views/post-card (posts post)]))]]))
+
+(defn home []
+  [:div
+   [:> drac/Heading {:align "center"}  "Recent Blog Posts"]
+   [blog-list 5]])
+
+(defn blog []
+  [:div
+   [:> drac/Heading {:align "center"}  "All Blog Posts"]
+   [blog-list (count @(rf/subscribe [::subs/post-order]))]])
 
 (defn blog-post []
   [views/post-body @(rf/subscribe [::subs/active-post])])
@@ -42,15 +42,16 @@
         ^{:key post}
         [views/post-card frontmatter])]]))
 
+(defn paper-data-link [keyword data]
+  (when-let [url (keyword data)]
+    [:> drac/Anchor {:href url :m "sm" :color "pinkPurple" :hoverColor "yellowPink"} (name keyword)]))
+
 (defn paper-row [[title data]]
   [:span
    [:> drac/Heading {:size "md"} title]
-   (when-let [preprint (:preprint data)]
-     [:> drac/Anchor {:href preprint :m "sm" :color "pinkPurple" :hoverColor "yellowPink"} "preprint"])
-   (when-let [paper (:paper data)]
-     [:> drac/Anchor {:href paper :m "sm" :color "pinkPurple" :hoverColor "yellowPink"} "paper"])
-   (when-let [talk (:talk data)]
-     [:> drac/Anchor {:href talk :m "sm" :color "pinkPurple" :hoverColor "yellowPink"} "talk"])])
+   (for [kw (keys data)]
+     ^{:key kw}
+     (paper-data-link kw data))])
 
 (defn publications []
   (let [pubs @(rf/subscribe [::subs/publications])]
