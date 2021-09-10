@@ -30,7 +30,8 @@
           [:> drac/Paragraph {:lineHeight "lg"}
            [:> drac/Text {:size "sm" :color "blackSecondary"}
             "Published: "
-            [:> drac/Text {:size "sm" :color "cyan"} (t/format date-format (t/date (:date post)))]]
+            [:> drac/Text {:size "sm" :color "cyan"}
+             (t/format date-format (t/date (:date post)))]]
            [:br]
            [post-tags post]]
           [:> drac/Heading {:color "purpleCyan"
@@ -60,7 +61,9 @@
   [:div {:style {:display "flex" :align-items "center"}}
    [:> drac/Box {:style {:margin-right "1rem"}}
     [:> drac/Text {:color "blackSecondary"}
-     (t/format (t/formatter "MMM dd, yy") (t/date (:date frontmatter)))]]
+     (try
+       (t/format (t/formatter "MMM dd, yy") (t/date (:date frontmatter)))
+       (catch js/Exception e (println "Error in " (:filename frontmatter))))]]
    [:> drac/Box {:m "md"}
     [:> drac/Anchor {:size "lg"
                      :href (str "/blog/" (:filename frontmatter))
