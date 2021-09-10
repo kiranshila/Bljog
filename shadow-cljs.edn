@@ -17,7 +17,8 @@
  {:app {:target :browser
         :output-dir "resources/public/js/compiled"
         :asset-path "/js/compiled"
-        :compiler-options {:closure-defines {"re_frame.trace.trace_enabled_QMARK_" true}}
+        :compiler-options {:output-feature-set :es2020
+                           :closure-defines {"re_frame.trace.trace_enabled_QMARK_" true}}
         :devtools {:http-root "resources/public"
                    :http-port 8280}
         :modules {:main {:init-fn main.core/init
