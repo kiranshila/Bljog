@@ -59,9 +59,11 @@
 
 (defn post-card [frontmatter]
   [:div {:style {:display "flex" :align-items "center"}}
-   [:> drac/Box {:style {:margin-right "1rem"}}
+   [:> drac/Box {:style {:margin-right "0.75rem"}}
     [:> drac/Text {:color "blackSecondary"}
-     (str (:date frontmatter))
+     (if (:date frontmatter)
+       "Has Date"
+       "Missing Date")
      #_(t/format (t/formatter "MMM dd, yy") (t/date (:date frontmatter)))]]
    [:> drac/Box {:m "md"}
     [:> drac/Anchor {:size "lg"
