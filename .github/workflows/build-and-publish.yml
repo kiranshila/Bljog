@@ -1,10 +1,6 @@
 name: Build and Deploy
 
-on:
-  push:
-    branches:
-      - main # Set a branch name to trigger deployment
-  pull_request:
+on: push
 
 jobs:
   deploy:
