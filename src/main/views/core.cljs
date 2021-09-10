@@ -61,7 +61,7 @@
   [:div {:style {:display "flex" :align-items "center"}}
    [:> drac/Box {:style {:margin-right "1rem"}}
     [:> drac/Text {:color "blackSecondary"}
-     (:date frontmatter)
+     (str (:date frontmatter))
      #_(t/format (t/formatter "MMM dd, yy") (t/date (:date frontmatter)))]]
    [:> drac/Box {:m "md"}
     [:> drac/Anchor {:size "lg"
