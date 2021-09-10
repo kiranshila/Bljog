@@ -10,14 +10,15 @@
   (let [post-order @(rf/subscribe [::subs/post-order])
         posts @(rf/subscribe [::subs/posts])]
 
-    (try
-      [:div
-       [:> drac/Box {:width "4xl" :style {:margin "auto"}}
-        (take num (for [post post-order
-                        :when (not (:draft (posts post)))]
-                    ^{:key post}
-                    [views/post-card (posts post)]))]]
-      (catch js/Exception e (println e)))))
+    [:div
+     [:> drac/Box {:width "4xl" :style {:margin "auto"}}
+      (take num (for [post post-order
+                      :let [post-data (posts post)]
+                      :when (and
+                             (:title post-data)
+                             (not (:draft post-data)))]
+                  ^{:key post}
+                  [views/post-card post-data]))]]))
 
 (defn home []
   [:div

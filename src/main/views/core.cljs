@@ -61,10 +61,7 @@
   [:div {:style {:display "flex" :align-items "center"}}
    [:> drac/Box {:style {:margin-right "0.75rem"}}
     [:> drac/Text {:color "blackSecondary"}
-     (if (:date frontmatter)
-       "Has Date"
-       "Missing Date")
-     #_(t/format (t/formatter "MMM dd, yy") (t/date (:date frontmatter)))]]
+     (t/format (t/formatter "MMM dd, yy") (t/date (:date frontmatter)))]]
    [:> drac/Box {:m "md"}
     [:> drac/Anchor {:size "lg"
                      :href (str "/blog/" (:filename frontmatter))
