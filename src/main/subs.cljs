@@ -34,5 +34,15 @@
 
 (rf/reg-sub
  ::current-route
- (fn [db]
+ (fn [db _]
    (:current-route db)))
+
+(rf/reg-sub
+ ::page-body
+ (fn [db [_ page]]
+   (get-in db [:page-body page])))
+
+(rf/reg-sub
+ ::publications
+ (fn [db _]
+   (:publications db)))

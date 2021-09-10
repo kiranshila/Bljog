@@ -8,6 +8,10 @@
    [main.events :as events]
    [main.subs :as subs]))
 
+(defn request-missing-page [page]
+  (when-not @(rfc/subscribe [::subs/page-body page])
+    (rfc/dispatch [::events/request-page page])))
+
 (def routes
   ["/"
    [""
@@ -32,15 +36,22 @@
    ["publications"
     {:name      ::publications
      :view      pages/publications
-     :link-text "Publications"}]
+     :link-text "Publications"
+     :controllers [{:start #(do
+                              (request-missing-page "publications.md")
+                              (when-not @(rfc/subscribe [::subs/publications])
+                                (rfc/dispatch [::events/request-edn "publications.edn"])))}]}]
    ["hire"
     {:name      ::hire
      :view      pages/hire
-     :link-text "Hire"}]
+     :link-text "Hire"
+     :controllers [{:start (partial request-missing-page "hire-me.md")}]}]
    ["about"
     {:name      ::about
      :view      pages/about
-     :link-text "About"}]
+     :link-text "About"
+
+     :controllers [{:start (partial request-missing-page "about.md")}]}]
    ["tags/:tag"
     {:name      ::tags
      :view      pages/tags

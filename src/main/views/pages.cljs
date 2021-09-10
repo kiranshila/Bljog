@@ -14,8 +14,7 @@
      [:> drac/Box {:width "4xl" :style {:margin "auto"}}
       (for [post top-posts]
         ^{:key post}
-        [views/post-card (posts post)])]
-     [:> drac/Heading {:size "xl" :align "center"} "Recent Publications"]]))
+        [views/post-card (posts post)])]]))
 
 (defn blog []
   (let [post-order @(rf/subscribe [::subs/post-order])
@@ -43,14 +42,31 @@
         ^{:key post}
         [views/post-card frontmatter])]]))
 
+(defn paper-row [[title data]]
+  [:span
+   [:> drac/Heading {:size "md"} title]
+   (when-let [preprint (:preprint data)]
+     [:> drac/Anchor {:href preprint :m "sm" :color "pinkPurple" :hoverColor "yellowPink"} "preprint"])
+   (when-let [paper (:paper data)]
+     [:> drac/Anchor {:href paper :m "sm" :color "pinkPurple" :hoverColor "yellowPink"} "paper"])
+   (when-let [talk (:talk data)]
+     [:> drac/Anchor {:href talk :m "sm" :color "pinkPurple" :hoverColor "yellowPink"} "talk"])])
+
 (defn publications []
-  [:div
-   [:> drac/Text "Here are my publications"]])
+  (let [pubs @(rf/subscribe [::subs/publications])]
+    [:> drac/Box
+     @(rf/subscribe [::subs/page-body "publications.md"])
+     [:> drac/Heading {:size "xl" :align "center"} "Conference Papers"]
+     (for [paper (:conference pubs)]
+       ^{:key (first paper)}
+       (paper-row paper))
+     [:> drac/Heading {:size "xl" :align "center"} "Journal Papers"]
+     (for [paper (:journal pubs)]
+       ^{:key (first paper)}
+       (paper-row paper))]))
 
 (defn hire []
-  [:div
-   [:> drac/Text "Pls hire me"]])
+  @(rf/subscribe [::subs/page-body "hire-me.md"]))
 
 (defn about []
-  [:div
-   [:> drac/Text "about kiran uwu"]])
+  @(rf/subscribe [::subs/page-body "about.md"]))
