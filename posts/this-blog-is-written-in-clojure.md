@@ -29,7 +29,13 @@ As I try to strive for a pretty integrated workflow, having to quit Emacs to typ
 
 If you take a look at the Emacs subreddit, people are recently flocking to the editor just to use one of its killer apps, Org mode. I talked about it in my previous Emacs blog post, but org is a pretty incredible piece of software.
 
-Org is my writing tool, my markup language, my jupyter notebook, my todos, and most recently, my note-taking app with [org-roam](https:https://org-roam.readthedocs.io/en/master/). If I am writing a blog post on programming, it makes **so** much more sense to have the blog actually execute the code and inline the results. What about \\(\LaTeX\\)? Wouldn't it be nice to have my post solve some symbolic code and inline the tex results? That just isn't really achievable with WordPress.
+Org is my writing tool, my markup language, my jupyter notebook, my todos, and
+most recently, my note-taking app with
+[org-roam](https:https://org-roam.readthedocs.io/en/master/). If I am writing a
+blog post on programming, it makes **so** much more sense to have the blog
+actually execute the code and inline the results. What about $`\LaTeX`$?Wouldn't
+it be nice to have my post solve some symbolic code and inline the tex results?
+That just isn't really achievable with WordPress.
 
 So, I had a plan.
 
@@ -52,7 +58,9 @@ There are a few excellent tools that do what I am trying to do - namely, [Firn](
 
 ## Project Structure {#project-structure}
 
-So the plan is to start with how the posts will be written. From org mode, I have pretty much the entire feature set of Markdown exposed, as well as all the other features I mentioned before. Namely, it gives me tight integration with \\(\LaTeX\\) and executing code blocks with \***\*emacs-jupyter\*\***. The backend is going to have to ingest some form of the blog post, and while I could try to parse the org AST, as I mentioned, I thought I _may_ want to write posts in Markdown at some point. Additionally, all of my old blog posts from WordPress have to be imported somehow.
+So the plan is to start with how the posts will be written. From org mode, I
+have pretty much the entire feature set of Markdown exposed, as well as all the
+other features I mentioned before. Namely, it gives me tight integration with $`\LaTeX`$ and executing code blocks with `emacs-jupyter`. The backend is going to have to ingest some form of the blog post, and while I could try to parse the org AST, as I mentioned, I thought I _may_ want to write posts in Markdown at some point. Additionally, all of my old blog posts from WordPress have to be imported somehow.
 
 There are numerous static site generation tools and there seems to be a commonality in that they usually have the posts themselves written in Markdown. One of the more full featured static site tools, Hugo, seems pretty popular. And as such, there is an [export tool](https:https://github.com/SchumacherFM/wordpress-to-hugo-exporter) that grabs all the posts and content from a WordPress site into a Markdown format that works for Hugo.
 
@@ -60,7 +68,7 @@ So, my plan was to have the backend parse Markdown to fill out the blog post con
 
 ### Frontend {#frontend}
 
-I actually started work first on the frontend. There are a **ton** of ClojureScript frontend options, but I went with \***\*reagent\*\***, a library that provides wrappers for React. React seems cool, so why not? Also if I ever want to do any app stuff, there is always React Native, of which there are ClojureScript wrappers for. So I scaffold-ed a project that had a reagent frontend integrated with Figwheel to provide the hot code reloading.
+I actually started work first on the frontend. There are a **ton** of ClojureScript frontend options, but I went with `reagent`, a library that provides wrappers for React. React seems cool, so why not? Also if I ever want to do any app stuff, there is always React Native, of which there are ClojureScript wrappers for. So I scaffold-ed a project that had a reagent frontend integrated with Figwheel to provide the hot code reloading.
 
 I then threw together some structure using Bootstrap. As I express all the divs and such with Clojure data (Hiccup), reagent creates React components for all the things that need them. Take the following Bootstrap html:
 
@@ -132,7 +140,7 @@ And because its just clojure data, I could extract out the repeating column code
 
 Pretty nice, right?
 
-Once there was some semblance of data containers, I started thinking about the APIs to get the post data to the frontend. Using \***\*cljs-http\*\***, I set up what would be the RESTfull calls to the backend; I expected to get the rendered Markup as just a big HTML string.
+Once there was some semblance of data containers, I started thinking about the APIs to get the post data to the frontend. Using `cljs-http`, I set up what would be the RESTfull calls to the backend; I expected to get the rendered Markup as just a big HTML string.
 
 To do this, I set up an atom to store all post content, that gets lazily loaded when the content is requested.
 
@@ -176,7 +184,7 @@ These routes set up what GETs need to be called for the different routes (throug
 
 For the backend, I'm using Ring + Jetty to actually serve the content. Simply enough, I setup the location of the static content, the compiled JS output and the functionality for the various API calls.
 
-So this would have been \***\*enough\*\*** but I hit a snag.
+So this would have been enough but I hit a snag.
 
 The markdown library I was using, markdown-clj didn't support all the features I wanted. Really, I wanted all the features Hugo supports. This includes tables from GFM, latex, shortcodes, heading refs, footnotes, citations, blockquotes, etc. There are a few other clojure-markdown libraries, but none of them were 100% of what I wanted. Most of them didn't allow for much customization if at all, which makes implementing the more complex markdown extensions difficult.
 
@@ -206,7 +214,7 @@ I'll publish the source soon for this - I'll clean it up to make it a bit more p
 
 To test to see if I was successful, I ran my WordPress blog though a tool that transformed everything to Hugo-compatible markdown.
 
-A few of my old blog posts were written in Org actually, pushed to WP with some tool that I can't remember. For those posts (they are the ones that were written for school reports and were also rendered to \\(\LaTeX\\)), I just ran them through ox-hugo. I had to fix a couple of things for the WP to Hugo stage as it wasn't quite 100%, but all it all it seemed to work!
+A few of my old blog posts were written in Org actually, pushed to WP with some tool that I can't remember. For those posts (they are the ones that were written for school reports and were also rendered to $`\LaTeX`$, I just ran them through ox-hugo. I had to fix a couple of things for the WP to Hugo stage as it wasn't quite 100%, but all it all it seemed to work!
 
 So I can finally uninstall WordPress!
 

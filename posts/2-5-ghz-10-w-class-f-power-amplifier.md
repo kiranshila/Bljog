@@ -10,15 +10,13 @@ tags:
 ---
 This spring I took a Power Amplifier design course with Dr. L. Dunleavy at USF, CEO at [Modelithics Inc][1]. In this course, I designed a Class F amplifier for 2.5 GHz. I used the [Qorvo QPD1010 FET][2] with microstrip matching networks.
 
-<!--more-->
-
 ## Active Design Crash Course
 
 To give a basic rundown in power amplifier design, lets begin with understanding how a transistor works.
 
 ### How Does a FET Work?
 
-{{< figure src="https://sub.allaboutcircuits.com/images/03423.png" >}}
+![](https://sub.allaboutcircuits.com/images/03423.png)
 
 For most modern amplifier designs, the specific type of device used is a Field Effect Transistor, or FET. The basic profile of the FET is shown above, where two wells of N-Type semiconductor are separated by P-Type semiconductor. These wells have metal contacts attached and are referred to as the s_ource_ and d_rain _of the device. In the resting state, i.e. laying on the table, no electrons can travel through the P-Type semiconductor from well to well.
 
