@@ -9,7 +9,7 @@
 (defn gen-frontmatters []
   (->> (for [file (rest (file-seq (io/file posts-path)))
              :when (and
-                    (= "md" (last (str/split (.getName file) #".")))
+                    (= "md" (last (str/split (.getName file) #"\.")))
                     (not (.isDirectory file)))
              :let [filename (.getName file)]]
          (assoc (cm/parse-front (slurp file)) :filename filename))
