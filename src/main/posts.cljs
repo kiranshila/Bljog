@@ -58,6 +58,11 @@
                      :title (:title (second reference))}
      body]))
 
+(defn lower-list-item [[_ _ & [body]]]
+  (if (string? (body 2))
+    [:li {} [:> drac/Text (body 2)]]
+    [:li {} body]))
+
 (defn lower-wrap-component [component & [attrs]]
   (fn [[_ attr-map & body]]
     (apply vector :> component (merge attr-map attrs) body)))
@@ -78,6 +83,8 @@
                                                            :width "auto"}
                                                    :align "center"
                                                    :variant "striped"})
+   :markdown/bullet-list-item lower-list-item
+   :markdown/ordered-list-item lower-list-item
    :markdown/link-ref lower-link-ref
    :markdown/heading lower-heading
    :markdown/inline-math lower-inline-math
