@@ -1,7 +1,7 @@
 (ns main.db
   (:require-macros [main.posts :refer [frontmatters]]))
 
-(defonce fronts (frontmatters))
+(def fronts (frontmatters))
 
 (def db {:title "logic-memory-center"
          :pages [:home :blog :publications :hire :about]

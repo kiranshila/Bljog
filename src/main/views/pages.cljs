@@ -4,6 +4,7 @@
    [tick.locale-en-us]
    ["@dracula/dracula-ui" :as drac]
    [main.subs :as subs]
+   [main.config :as config]
    [main.views.core :as views]))
 
 (defn blog-list [num]
@@ -16,7 +17,8 @@
                       :let [post-data (posts post)]
                       :when (and
                              (:title post-data)
-                             (not (:draft post-data)))]
+                             (or (not (:draft post-data))
+                                 config/debug?))]
                   ^{:key post}
                   [views/post-card post-data]))]]))
 
