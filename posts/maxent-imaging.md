@@ -1,7 +1,7 @@
 ---
 title: Maximum Entropy Image Reconstruction for Radio Astronomy
 author: kiran
-draft: false
+draft: true
 date: 2021-05-01
 tags:
   - julia
@@ -91,9 +91,7 @@ increased. Also, the actual deconvolution process of CLEAN introduces further
 confusion into the statistics of the image. In fact, the artifacts introduced
 by CLEAN are not able to be well described.
 
-![gridded visibilities](/figures/grided_visibilities.svg)
-
-{{< figure src="figures/grided_visibilites.svg" caption="Gridded ALMA
+{{< figure src="/figures/grided_visibilites.svg" caption="Gridded ALMA
 Visibilites" >}}
 
 ## MEM Methods
@@ -128,9 +126,9 @@ and
 S(I) = -I\log\left(I\right)
 ```
 
-The latter of which has is proven from an information theory perspective in
-cite:brookes59_mathem_found_infor_theor with the former coming from
-thermodynamic entropy cite:kikuchi77_maxim_entrop_image_restor_i_entrop_expres.
+The latter of which has is proven from an information theory perspective by
+Brookes (1959) with the former coming from
+thermodynamic entropy Kikuchi (1977).
 The resulting probability of a given pixel is then
 
 ```latex
@@ -138,8 +136,7 @@ P(I) \propto e^{S(I)}.
 ```
 
 Including a "prior image"and considering all pixels results in a compact
-metric for the "entropy" of the entire image
-cite:frieden78_restor_with_maxim_entrop_iii,narayan86_maxim_entrop_image_restor_astron.
+metric for the "entropy" of the entire image.
 
 ```latex
 S = -\sum_{i = 1}^{n} I_{i}\log\left(\frac{I_{i}}{P_{i}}\right)
@@ -219,21 +216,21 @@ Due to the abstract nature of the regularization function, any pure Julia
 functions can be used and will be appropriately differentiated. As such, a
 simple implementation of constraining total flux of a model is added as well as
 imaging in the log-space of the pixels (to avoid domain errors of the entropy
-terms) cite:chael18_inter_imagin_direc_with_closur.
+terms).
 
 Simulated data was constructed using the `eht-imaging` package in Python and exported in HDF5
 format for ease of transfer to Julia.
 
 # Results
 
-Three models of interferometric images were used in testing. One of SgrA*, one
-of M87*, and one that is a collection of point sources and extended emission.
-The former two of which were as included in the =eht-imaging= models repository.
+Three models of interferometric images were used in testing. One of SgrA, one
+of M87, and one that is a collection of point sources and extended emission.
+The former two of which were as included in the `eht-imaging` models repository.
 The data was formed as a simulated observation from the Event Horizon Telescope,
 as configured in 2017. For these particular observations, the baseline pairs
 forms the following uv coverage:
 
-As mentioned in cite:chael18_inter_imagin_direc_with_closur, we can start with a
+As is typical, we can start with a
 gaussian prior and model image, then focus of matching the visibility data.
 Then, in later iterations, increase the weight of the regularization
 (particularly the entropy).
@@ -248,7 +245,7 @@ can be seen in an animation of the solution.
 
 The implementation of the adjoints proved to be the most difficult part. I tried
 many different ways of sampling and unsampling the visibilities. Between my
-gridding utility, `NFFT.jl`, interpolating =FFTW= results, and using `PyCall.jl`
+gridding utility, `NFFT.jl`, interpolating `FFTW` results, and using `PyCall.jl`
 to invoke `pyNFFT`, nothing was consistent. Additionally, I tried some "real"
 data from ALMA, but got really caught up in trying to read the file, as
 astronomers think it's funny to use file formats from the 70s.
