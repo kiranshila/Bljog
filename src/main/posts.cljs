@@ -1,13 +1,17 @@
 (ns main.posts
   (:require
+   [main.shortcodes :as sc]
    [reagent.core :as r]
    [cybermonday.core :as cm]
    [cybermonday.utils :as cmu]
+   [cybermonday.ir :as ir]
+   [cybermonday.lowering :as lowering]
    ["@dracula/dracula-ui" :as drac]
    ["react-syntax-highlighter/dist/esm/styles/prism/dracula" :default code-style]
    ["react-syntax-highlighter" :as highlighter]
    [clojure.string :as str]
-   ["@matejmazur/react-katex" :as TeX]))
+   ["@matejmazur/react-katex" :as TeX]
+   [clojure.walk :as walk]))
 
 (def heading-level ["xl" "lg" "md" "sm" "xs" "xs"])
 
@@ -94,8 +98,26 @@
   {:th {:class ["drac-text" "drac-text-white"]}
    :td {:class ["drac-text" "drac-text-white"]}})
 
+(defn process-shortcodes [mdast]
+  (walk/postwalk
+   (fn [item]
+     (if (cmu/hiccup? item)
+       (let [[tag _ & [body]] item]
+         ; Shortcodes must appear as a single string and the shortcode replaces the parent
+         (if (and (not= tag :code)
+                  (string? body))
+           (if-let [shortcode (second (re-matches sc/figure-re body))]
+             (sc/lower-figure shortcode)
+             item)
+           item))
+       item))
+   mdast))
+
 (defn parse [md]
-  (cm/parse-body
-   md
-   {:lower-fns lower-fns
-    :default-attrs default-attrs}))
+  (let [[_ _ body] (re-matches cm/frontmatter-re md)]
+    (-> body
+        ir/md-to-ir
+        ; This has to happen before lowering as the react interop makes things *not quite* hiccup
+        process-shortcodes
+        (lowering/to-html-hiccup {:lower-fns lower-fns :default-attrs default-attrs})
+        cmu/cleanup)))
