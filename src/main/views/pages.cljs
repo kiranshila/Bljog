@@ -74,4 +74,7 @@
   @(rf/subscribe [::subs/page-body "hire-me.md"]))
 
 (defn about []
-  @(rf/subscribe [::subs/page-body "about.md"]))
+  [:> drac/Box
+   @(rf/subscribe [::subs/page-body "about.md"])
+   [:div {:style {:display "flex" :justify-content "center"}}
+    [:> drac/Avatar {:title "Kiran" :src "/profile.jpg" :variant "subtle"}]]])
