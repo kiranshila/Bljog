@@ -9,5 +9,3 @@ development in Rust.
 In my free time, I like to hike, ski, backpack, and play the vibraphone.
 
 I hope to use this site to document my projects and hobbies, thanks for reading!
-
-{{ img=avatar }}
