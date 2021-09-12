@@ -1,0 +1,3 @@
+[submodule "resources/static"]
+	path = resources/static
+	url = git@github.com:kiranshila/blog_posts.git

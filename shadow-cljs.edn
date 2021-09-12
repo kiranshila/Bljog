@@ -8,6 +8,7 @@
   [re-frisk "1.5.1"]
   [cljs-ajax "0.8.4"]
   [tick "0.5.0-RC1"]
+  [instaparse "1.4.10"]
   [day8.re-frame/http-fx "0.2.3"]
   [metosin/reitit "0.5.15"]
   [com.kiranshila/cybermonday "0.2.132"]
