@@ -22,6 +22,6 @@ git submodule update --remote --recursive
 Simply
 
 ```bash
-yarn install
-yarn shadow-cljs release app
+npm install
+npx shadow-cljs release app
 ```
