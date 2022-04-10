@@ -65,7 +65,7 @@
          route (assoc new-match :controllers controllers)]
      (-> db
          (assoc :active-page (name (get-in route [:data :name])))
-         (assoc  :current-route route)))))
+         (assoc :current-route route)))))
 
 (rf/reg-event-db
  ::process-post

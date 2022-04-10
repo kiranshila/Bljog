@@ -4,15 +4,15 @@
 
  :dependencies
  [[re-frame "1.2.0"]
-  [reagent "1.1.0"]
-  [re-frisk "1.5.1"]
+  [reagent "1.1.1"]
+  [re-frisk "1.5.2"]
   [cljs-ajax "0.8.4"]
-  [tick "0.5.0-RC1"]
+  [tick "0.5.0-RC5"]
   [instaparse "1.4.10"]
-  [day8.re-frame/http-fx "0.2.3"]
-  [metosin/reitit "0.5.15"]
-  [com.kiranshila/cybermonday "0.2.132"]
-  [binaryage/devtools "1.0.3"]]
+  [day8.re-frame/http-fx "0.2.4"]
+  [metosin/reitit "0.5.18"]
+  [com.kiranshila/cybermonday "0.4.182"]
+  [binaryage/devtools "1.0.5"]]
 
  :builds
  {:app {:target :browser
