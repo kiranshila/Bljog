@@ -3,9 +3,9 @@ title: My First Driver Crate in Rust
 author: kiran
 date: 2022-02-15T00:00:00+00:00
 lastmod: 2022-03-04T00:00:00+00:00
+draft: true
 tags:
   - rust
-  - draft
 ---
 
 I've been playing around with [rust](https://www.rust-lang.org/) a lot recently
