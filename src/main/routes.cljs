@@ -46,6 +46,11 @@
      :view      pages/hire
      :link-text "Hire"
      :controllers [{:start (partial request-missing-page "hire-me.md")}]}]
+   ["open-source"
+    {:name     ::open-source
+     :view     pages/open-source
+     :link-text "Open Source"
+     :controllers [{:start (partial request-missing-page "open-source.md")}]}]
    ["about"
     {:name      ::about
      :view      pages/about

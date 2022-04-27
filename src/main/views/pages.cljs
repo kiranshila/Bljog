@@ -59,6 +59,9 @@
      ^{:key kw}
      (paper-data-link kw data))])
 
+(defn open-source []
+  @(rf/subscribe [::subs/page-body "open-source.md"]))
+
 (defn publications []
   (let [pubs @(rf/subscribe [::subs/publications])]
     [:> drac/Box

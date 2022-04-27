@@ -13,7 +13,7 @@
    ["@matejmazur/react-katex" :as TeX]
    [clojure.walk :as walk]))
 
-(def heading-level ["xl" "lg" "md" "sm" "xs" "xs"])
+(def heading-level ["lg" "md" "sm" "xs" "xs"])
 
 (def Highlighter (.-Prism highlighter))
 
@@ -22,17 +22,31 @@
    (:children props)])
 
 (defn lower-heading [[_ attrs & [body] :as node]]
-  (let [[_ heading id] (re-matches #"^(.+?)(?: \{#(\S+)})?$" body)
-        id (or id (cmu/gen-id node))
-        level (dec (:level attrs))]
-    [:> drac/Heading
-     [:> drac/Anchor
-      {:color "white"
-       :id id
-       :size (nth heading-level level)
-       :class "anchor"
-       :href (str "#" id)}
-      heading]]))
+  (cond
+    (string? body)
+    (let [[_ heading id] (re-matches #"^(.+?)(?: \{#(\S+)})?$" body)
+          id (or id (cmu/gen-id node))
+          level (dec (:level attrs))]
+      [:div {:style {:display "flex" :justify-content "center"}}
+       [:> drac/Heading
+        {:size (nth heading-level level)}
+        [:> drac/Anchor
+         {:color "white"
+          :id id
+          :size (nth heading-level level)
+          :class "anchor"
+          :href (str "#" id)}
+         heading]]])
+    (= (first body) :a)
+    (let [[_ {:keys [href]} title] body]
+      [:> drac/Heading
+       [:> drac/Anchor
+        {:size (nth heading-level (:level attrs))
+         :class "anchor"
+         :color "cyanGreen"
+         :hoverColor "yellowPink"
+         :href href}
+        title]])))
 
 (defn lower-inline-math [[_ _ math]]
   [:> TeX {:math math
@@ -69,7 +83,7 @@
 
 (defn lower-wrap-component [component & [attrs]]
   (fn [[_ attr-map & body]]
-    (apply vector :> component (merge attr-map attrs) body)))
+    (apply vector :> component (merge attrs attr-map) body)))
 
 (def lower-fns
   {:ul    (lower-wrap-component drac/List         {:color "purple"
