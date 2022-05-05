@@ -279,7 +279,7 @@ println!("{:#?}",parse("defn foo (x) (+ x x))"))
 
 et viola, a beautiful lossless tree!
 
-```
+```plain
 ROOT@0..22
   LIST@0..22
     L_PAREN@0..1 "("
