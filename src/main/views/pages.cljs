@@ -44,7 +44,9 @@
      [:> drac/Box {:width "4xl" :style {:margin "auto"}}
       (for [post post-order
             :let [frontmatter (posts post)]
-            :when (some #{tag} (:tags frontmatter))]
+            :when (and (some #{tag} (:tags frontmatter))
+                       (or (not (:draft frontmatter))
+                           config/debug?))]
         ^{:key post}
         [views/post-card frontmatter])]]))
 
