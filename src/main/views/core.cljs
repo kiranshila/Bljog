@@ -1,6 +1,6 @@
 (ns main.views.core
   (:require
-   ["@dracula/dracula-ui" :as drac]
+   ["dracula-ui" :as drac]
    [re-frame.core :as rf]
    [tick.core :as t]
    [tick.locale-en-us]

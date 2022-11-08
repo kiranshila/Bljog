@@ -3,16 +3,16 @@
  ["src"]
 
  :dependencies
- [[re-frame "1.2.0"]
+ [[re-frame "1.0.0"]
   [reagent "1.1.1"]
-  [re-frisk "1.5.2"]
+  [re-frisk "1.6.0"]
   [cljs-ajax "0.8.4"]
-  [tick "0.5.0-RC5"]
-  [instaparse "1.4.10"]
+  [tick "0.5.0"]
+  [instaparse "1.4.12"]
   [day8.re-frame/http-fx "0.2.4"]
   [metosin/reitit "0.5.18"]
-  [com.kiranshila/cybermonday "0.4.182"]
-  [binaryage/devtools "1.0.5"]]
+  [com.kiranshila/cybermonday "0.4.184"]
+  [binaryage/devtools "1.0.6"]]
 
  :builds
  {:app {:target :browser

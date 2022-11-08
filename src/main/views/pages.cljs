@@ -2,7 +2,7 @@
   (:require
    [re-frame.core :as rf]
    [tick.locale-en-us]
-   ["@dracula/dracula-ui" :as drac]
+   ["dracula-ui" :as drac]
    [main.subs :as subs]
    [main.config :as config]
    [main.views.core :as views]))

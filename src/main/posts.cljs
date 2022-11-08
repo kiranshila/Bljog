@@ -6,7 +6,7 @@
    [cybermonday.utils :as cmu]
    [cybermonday.ir :as ir]
    [cybermonday.lowering :as lowering]
-   ["@dracula/dracula-ui" :as drac]
+   ["dracula-ui" :as drac]
    ["react-syntax-highlighter/dist/esm/styles/prism/dracula" :default code-style]
    ["react-syntax-highlighter" :as highlighter]
    [clojure.string :as str]
