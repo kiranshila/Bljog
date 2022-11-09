@@ -1,7 +1,7 @@
 ---
 title: An Amaranth-Based Packetizer for the CASPER Toolflow
 author: kiran
-draft: true
+draft: false
 date: 2022-11-08
 tags:
   - python
